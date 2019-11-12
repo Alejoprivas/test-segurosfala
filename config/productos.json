@@ -1,5 +1,5 @@
-{
-  "1": {
+[
+  {
     "nombre": "Cobertura",
     "sellIn": 4,
     "price": 6,
@@ -8,7 +8,7 @@
         {"action":"substract","setpricestep":"2","daysremaining":"0"}
     ]
   },
-  "2": {
+ {
     "nombre": "Full cobertura Super duper",
     "sellIn": 4,
     "price": 6,
@@ -19,7 +19,7 @@
         {"action":"substract","setpricestep":"2","daysremaining":"0"}
     ]
   },
-  "3": {
+  {
     "nombre": "Full cobertura",
     "sellIn": 4,
     "price": 6,
@@ -30,7 +30,7 @@
         {"action":"substract","setpricestep":"2","daysremaining":"0"}
     ]
   },
-  "4": {
+ {
     "name": "Super avance",
     "sellIn": 1,
     "price": 19,
@@ -39,7 +39,7 @@
         {"action":"substract","setpricestep":"2","daysremaining":"0"}
     ]
   },
-  "5": {
+   {
     "nombre": "Mega Cobertura",
     "sellIn": "1",
     "price": "1",
@@ -48,4 +48,4 @@
         {"action":"add","setpricestep":"0","daysremaining":"0"}
     ]
   }
-}
+]

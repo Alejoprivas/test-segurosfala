@@ -1,9 +1,9 @@
 const productController = require('../controllers/productController')
-
 const productRoutes = (app) => {
 
     
     // READ
+    app.get('/test', productController.testFunction);
     app.get('/productos', productController.getProducts);
 
     // CREATE NEW PRODUCT 

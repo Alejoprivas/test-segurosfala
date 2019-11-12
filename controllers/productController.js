@@ -1,44 +1,34 @@
 
 const fs = require('fs');
+const Producto = require('../models/productos')
+
+
+
     // variables
-    const dataPath = process.env.DATAPATH;
+const dataPath = process.env.DATAPATH;
 
     // helper methods
-    const readFile = (callback, returnJson = false, filePath = dataPath, encoding = 'utf8') => {
-        fs.readFile(filePath, encoding, (err, data) => {
-            if (err) {
-                throw err;
-            }
 
-            callback(returnJson ? JSON.parse(data) : data);
-        });
-    };
-
-    const writeFile = (fileData, callback, filePath = dataPath, encoding = 'utf8') => {
-        fs.writeFile(filePath, fileData, encoding, (err) => {
-            if (err) {
-                throw err;
-            }
-
-            callback();
-        });
-    };
-
-    
-exports.testFunction = (req,res,next) =>{ 
-    res.send('Sample controller test')
+exports.testFunction = async (req,res,next) =>{
+    try{
+        let producto = new Producto();
+        await producto.testProduct();  
+        res.send('Sample controller test')
+    }catch(e){
+        next(e)
+    }
 }
 
 
-exports.getProducts = (req, res) => {
-        
-    fs.readFile(dataPath, 'utf8', (err, data) => {
-        if (err) {
-            throw err;
-        }
+exports.getProducts = async (req, res) => {
 
-        res.send(JSON.parse(data));
-    });
+    try{
+        let producto = new Producto();
+        let products = await producto.getAllProducts();  
+        res.send(products);
+    }catch(e){
+        next(e)
+    }
 }
 
 exports.createProduct = (req, res) => {
@@ -57,19 +47,15 @@ exports.createProduct = (req, res) => {
         
 }
 
-exports.sellProduct = (req, res) => {
+exports.sellProduct = async (req, res) => {
 
-        
-    readFile(data => { 
-        const newProductId = Object.keys(data).length + 1;
-
-        data[newProductId.toString()] = req.body;
-
-        writeFile(JSON.stringify(data, null, 2), () => {
-            res.status(200).send('new product added');
-        });
-    },
-        true);
+    try{
+        let producto = new Producto();
+        let products = await producto.getAllProducts();  
+        res.send(products);
+    }catch(e){
+        next(e)
+    }
         
 }
 
