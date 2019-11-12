@@ -1,13 +1,13 @@
 
-const productRoutes = require('./productos');
+const productRoutes = require('./productRoutes');
 
-const appRouter = (app, fs) => {
+const appRouter = (app) => {
 
     app.get('/', (req, res) => {
         res.send('test');
     });
 
 
-    productRoutes(app, fs);
+    productRoutes(app);
 }; 
 module.exports = appRouter;

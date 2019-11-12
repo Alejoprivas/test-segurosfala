@@ -1,6 +1,5 @@
 
-const productRoutes = (app, fs) => {
-
+const fs = require('fs');
     // variables
     const dataPath = process.env.DATAPATH;
 
@@ -16,7 +15,6 @@ const productRoutes = (app, fs) => {
     };
 
     const writeFile = (fileData, callback, filePath = dataPath, encoding = 'utf8') => {
-
         fs.writeFile(filePath, fileData, encoding, (err) => {
             if (err) {
                 throw err;
@@ -26,48 +24,57 @@ const productRoutes = (app, fs) => {
         });
     };
 
-    // READ
-    app.get('/productos', (req, res) => {
-        
-        fs.readFile(dataPath, 'utf8', (err, data) => {
-            if (err) {
-                throw err;
-            }
+    
+exports.testFunction = (req,res,next) =>{ 
+    res.send('Sample controller test')
+}
 
-            res.send(JSON.parse(data));
+
+exports.getProducts = (req, res) => {
+        
+    fs.readFile(dataPath, 'utf8', (err, data) => {
+        if (err) {
+            throw err;
+        }
+
+        res.send(JSON.parse(data));
+    });
+}
+
+exports.createProduct = (req, res) => {
+
+        
+    readFile(data => { 
+        const newProductId = Object.keys(data).length + 1;
+
+        data[newProductId.toString()] = req.body;
+
+        writeFile(JSON.stringify(data, null, 2), () => {
+            res.status(200).send('new product added');
         });
-    });
-
-    app.get('/evaluateProducts/:days', (req, res) => {
+    },
+        true);
         
-        fs.readFile(dataPath, 'utf8', (err, data) => {
-            if (err) {
-                throw err;
-            }
+}
 
-            res.send(JSON.parse(data));
+exports.sellProduct = (req, res) => {
+
+        
+    readFile(data => { 
+        const newProductId = Object.keys(data).length + 1;
+
+        data[newProductId.toString()] = req.body;
+
+        writeFile(JSON.stringify(data, null, 2), () => {
+            res.status(200).send('new product added');
         });
-    });
-
-    // CREATE
-    app.post('/productos', (req, res) => {
-
+    },
+        true);
         
-        readFile(data => { 
-            const newProductId = Object.keys(data).length + 1;
+}
 
-            data[newProductId.toString()] = req.body;
-
-            writeFile(JSON.stringify(data, null, 2), () => {
-                res.status(200).send('new product added');
-            });
-        },
-            true);
-            
-    });
-
-
-    // UPDATE
+/**
+ *     // UPDATE
     app.put('/productos/:id', (req, res) => {
 
         readFile(data => {
@@ -98,9 +105,4 @@ const productRoutes = (app, fs) => {
         },
             true);
     });
-};
-
-
-
-
-module.exports = productRoutes;
+ **/

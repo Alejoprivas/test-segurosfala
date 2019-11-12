@@ -5,7 +5,6 @@ const express = require('express')
 const app = express();
 const swaggerUi = require('swagger-ui-express');
 const bodyParser = require('body-parser');
-const fs = require('fs');
 //const swaggerDocument = require('config/swagger.json');
 
 
@@ -17,7 +16,8 @@ app.listen(process.env.PORT || 9090 , process.env.HOST || '0.0.0.0' , function()
 //get routes
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-const routes = require('./routes/routes.js')(app, fs);
+
+const routes = require('./routes/routes.js')(app);
 
 /*
 app.use((req, res) => {
