@@ -38,6 +38,17 @@ const productRoutes = (app, fs) => {
         });
     });
 
+    app.get('/evaluateProducts/:days', (req, res) => {
+        
+        fs.readFile(dataPath, 'utf8', (err, data) => {
+            if (err) {
+                throw err;
+            }
+
+            res.send(JSON.parse(data));
+        });
+    });
+
     // CREATE
     app.post('/productos', (req, res) => {
 
@@ -88,5 +99,8 @@ const productRoutes = (app, fs) => {
             true);
     });
 };
+
+
+
 
 module.exports = productRoutes;
