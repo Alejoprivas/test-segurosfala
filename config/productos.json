@@ -4,30 +4,30 @@
     "sellIn": 4,
     "price": 6,
     "rules":[
-        {"action":"substract","setpricestep":"1","daysremaining":"1"},
-        {"action":"substract","setpricestep":"2","daysremaining":"0"}
+        {"action":"substract","setpricestep":1,"daysremaining":1},
+        {"action":"substract","setpricestep":2,"daysremaining":0}
     ]
   },
  {
     "nombre": "Full cobertura Super duper",
-    "sellIn": 4,
+    "sellIn": 9,
     "price": 6,
     "rules":[
-        {"action":"add","setpricestep":"1","daysremaining":"11"},
-        {"action":"add","setpricestep":"2","daysremaining":"10"},
-        {"action":"add","setpricestep":"3","daysremaining":"5"},
-        {"action":"substract","setpricestep":"2","daysremaining":"0"}
+        {"action":"add","setpricestep":1,"daysremaining":11},
+        {"action":"add","setpricestep":2,"daysremaining":10},
+        {"action":"add","setpricestep":3,"daysremaining":5},
+        {"action":"substract","setpricestep":2,"daysremaining":0}
     ]
   },
   {
     "nombre": "Full cobertura",
-    "sellIn": 4,
+    "sellIn": 11,
     "price": 6,
     "rules":[
-        {"action":"add","setpricestep":"1","daysremaining":"11"},
-        {"action":"add","setpricestep":"2","daysremaining":"10"},
-        {"action":"add","setpricestep":"3","daysremaining":"5"},
-        {"action":"substract","setpricestep":"2","daysremaining":"0"}
+        {"action":"add","setpricestep":1,"daysremaining":11},
+        {"action":"add","setpricestep":2,"daysremaining":10},
+        {"action":"add","setpricestep":3,"daysremaining":5},
+        {"action":"substract","setpricestep":2,"daysremaining":0}
     ]
   },
  {
@@ -35,17 +35,17 @@
     "sellIn": 1,
     "price": 19,
     "rules":[
-        {"action":"substract","setpricestep":"2","daysremaining":"11"},
-        {"action":"substract","setpricestep":"2","daysremaining":"0"}
+        {"action":"substract","setpricestep":2,"daysremaining":11},
+        {"action":"substract","setpricestep":2,"daysremaining":0}
     ]
   },
    {
     "nombre": "Mega Cobertura",
-    "sellIn": "1",
-    "price": "1",
+    "sellIn": 1,
+    "price": 1,
     "rules":[
-        {"action":"add","setpricestep":"0","daysremaining":"11"},
-        {"action":"add","setpricestep":"0","daysremaining":"0"}
+        {"action":"add","setpricestep":0,"daysremaining":11},
+        {"action":"add","setpricestep":0,"daysremaining":0}
     ]
   }
 ]
