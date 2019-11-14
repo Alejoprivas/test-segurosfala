@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "description": "Prueba para test de seguros falabella",
   "author": "Alejandro Perez <alejoprivas@gmail.com>",
-  "main": "server.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node app.js"
   },
   "dependencies": {
     "dotenv": "^8.2.0",

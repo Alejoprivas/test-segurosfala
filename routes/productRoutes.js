@@ -5,11 +5,11 @@ const productRoutes = (app) => {
 
     app.get('/productos', productController.getProducts);
     // CREATE NEW PRODUCT 
-    app.post('/productos', productController.createProduct);
+    app.post('/createProduct', productController.createProduct);
     // SELL PRODUCT
     app.get('/sellProducto',productController.sellProduct)
     // EVALUATE PRODUCT
-    app.get('/evaluateProducts/:days',productController.evaluateProduct);
+    app.get('/evaluateProducts/:days',productController.prettyPrint);
     
 };
 

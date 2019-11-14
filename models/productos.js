@@ -10,23 +10,17 @@ class Product{
     constructor (parameters = {}){
         
         let defaultRules = [
-            {action:"add",setpricestep:0,daysremaining:11},
-            {action:"add",setpricestep:0,daysremaining:0}
+            {action:"add",setpricestep:1,daysremaining:1},
+            {action:"substract",setpricestep:2,daysremaining:0}
         ];
 
-        this.nombre =parameters.nombre;
-        this.sellIn = parameters.sellIn;
-        this.price= parameters.price;
+        this.nombre =parameters.nombre || "";
+        this.sellIn = parameters.sellIn || 0 ;
+        this.price= parameters.price || 0;
         this.rules = parameters.rules || defaultRules;
     }
 
 
-    testProduct = async ()=>{
-         return this.simulateProductbehavior(15);
-
-
-        
-    };
     getAllProducts = async ()=>{
         let productos  = JSON.parse( await readFileAsync(dataPath,'utf8'));
         return productos;
@@ -39,19 +33,17 @@ class Product{
         });
         return selectedProduct;
     }
-    sellNewProduct = async(name,sellIn,price)=>{
+    sellNewProduct = async(name,sellIn,price,rules)=>{
         let selectedProduct = await this.getProductByName(name);
         let productos =  await this.getAllProducts();
-
+        
         let productToSell = {
             nombre: name,
-            sellIn: sellIn,
-            price:price,
-             rules:[
-            {action:"add",setpricestep:0,daysremaining:11},
-            {action:"add",setpricestep:0,daysremaining:0}
-        ]
+            sellIn: parseInt(sellIn),
+            price: parseInt(price),
+            rules: JSON.parse(rules)
         }
+        console.log(productToSell)
         productos.push(productToSell);
 
         await writeFileAsync(dataPath,JSON.stringify(productos)) 

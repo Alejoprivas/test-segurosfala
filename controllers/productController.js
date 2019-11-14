@@ -12,7 +12,9 @@ const dataPath = process.env.PRODUCTPATH;
 exports.prettyPrint = async (req,res,next) =>{
     try{
         let producto = new Producto();
-        let evaluatedProduct = await producto.testProduct();
+
+        console.log(req.params);
+        let evaluatedProduct = await producto.simulateProductbehavior(req.params.days);
         let table="" ;
         
         for(let i = 0; i<evaluatedProduct.length;i++){
@@ -23,10 +25,10 @@ exports.prettyPrint = async (req,res,next) =>{
             }); 
             table += `--------Final de dia --------<br>`;
         }
-
+        
         res.send(table);
     }catch(e){
-        next(e)
+        res.send("Unexpected Error")
     }
 }
 
@@ -35,16 +37,32 @@ exports.getProducts = async (req, res) => {
 
     try{
         let producto = new Producto();
-        let products = await producto.getAllProducts();  
-        res.send(products);
+        
+        let products = await producto.getAllProducts();
+        let productsAvailable = products.map((product)=>{
+
+            delete product.rules;
+            return product
+        })   
+        res.send(productsAvailable);
     }catch(e){
-        next(e)
+        console.log(e)
+        res.send("Unexpected Error")
     }
 }
 
 exports.createProduct = (req, res) => {
+    try{
+        let producto = new Producto();
+        let newProduct  = req.body
+        producto.sellNewProduct(newProduct.nombre,newProduct.sellIn,newProduct.price,newProduct.rules);
+        res.send("Se agrego un nuevo producto");
+    }catch(e){
+        console.log(e)
+        res.send("Unexpected Error")
+    }
 
-        
+   /*     
     readFile(data => { 
         const newProductId = Object.keys(data).length + 1;
 
@@ -55,7 +73,7 @@ exports.createProduct = (req, res) => {
         });
     },
         true);
-        
+     */   
 }
 
 exports.sellProduct = async (req, res) => {
@@ -65,7 +83,8 @@ exports.sellProduct = async (req, res) => {
         let products = await producto.getAllProducts();  
         res.send(products);
     }catch(e){
-        res.send(e);
+
+        res.send("Unexpected Error")
     }
         
 }
@@ -73,10 +92,10 @@ exports.sellProduct = async (req, res) => {
 exports.evaluateProduct = async (req,res) =>{
     try{
         let producto = new Producto();
-        let products = await producto.testProduct();  
+        let products = await producto.simulateProductbehavior(req.params.days);  
         
         res.send(products);
-    }catch(e){
-        res.send(e)
+    }catch(e){ 
+        res.send("Unexpected Error")
     }
 }

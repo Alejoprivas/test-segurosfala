@@ -1,0 +1,115 @@
+{
+	"info": {
+		"_postman_id": "4f5ed94e-a1bd-4add-9821-141dff48c3b9",
+		"name": "Seguros Test",
+		"description": "Este es una coleccion de postman para el test de seguros falabella",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Listar Productos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/productos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"productos"
+					]
+				},
+				"description": "Muestra la lista de productos vendidos actualmente"
+			},
+			"response": []
+		},
+		{
+			"name": "Evaluar Productos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/evaluateProducts/15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"evaluateProducts",
+						"15"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "15",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Muestra la variacion de cada producto cada dia."
+			},
+			"response": []
+		},
+		{
+			"name": "Vender producto",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nombre",
+							"value": "test",
+							"description": "Nombre del producto.",
+							"type": "text"
+						},
+						{
+							"key": "sellIn",
+							"value": "20",
+							"description": "Dias disponibles hasta que el producto se vence.",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "200",
+							"description": "precio del producto",
+							"type": "text"
+						},
+						{
+							"key": "rules",
+							"value": "[{\"action\":\"add\",\"setpricestep\":1,\"daysremaining\":11},\n{\"action\":\"add\",\"setpricestep\":2,\"daysremaining\":10},\n{\"action\":\"add\",\"setpricestep\":3,\"daysremaining\":5},\n{\"action\":\"add\",\"setpricestep\":3,\"daysremaining\":1},\n{\"action\":\"substract\",\"setpricestep\":2,\"daysremaining\":0}]",
+							"description": "las reglas que cambian el precio del producto durante la simulacion",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/createProduct",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createProduct"
+					]
+				},
+				"description": "Agregar un producto a la lista de productos"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
