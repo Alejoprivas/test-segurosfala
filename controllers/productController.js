@@ -6,16 +6,25 @@ const Producto = require('../models/productos')
 
     // variables
 const dataPath = process.env.PRODUCTPATH;
-const rulePath = process.env.RULEPATH;
 
     // helper methods
 
-exports.testFunction = async (req,res,next) =>{
+exports.prettyPrint = async (req,res,next) =>{
     try{
         let producto = new Producto();
         let evaluatedProduct = await producto.testProduct();
-     
-        res.send(evaluatedProduct);
+        let table="" ;
+        
+        for(let i = 0; i<evaluatedProduct.length;i++){
+            table += `--------Dia: ${i} --------<br>`;
+            table += `Nombre, SellIn, Price <br>`;
+            evaluatedProduct[i].forEach(producto => {
+                table += `${producto.nombre}, ${producto.sellIn} , ${producto.price} <br>`;    
+            }); 
+            table += `--------Final de dia --------<br>`;
+        }
+
+        res.send(table);
     }catch(e){
         next(e)
     }

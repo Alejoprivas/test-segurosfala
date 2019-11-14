@@ -59,7 +59,7 @@ class Product{
     simulateProductbehavior = async (days)=>{ 
         let productos = await this.getAllProducts();
         let evaluatedProducts =[];
-        let copy = []; 
+
             for(let i=0;i<days;i++){ 
                 evaluatedProducts[i] = productos.map((product)=>{
                     let applyCurrentRule = product.rules.reduce((prev, curr)=>{
@@ -73,12 +73,9 @@ class Product{
                 delete newProduct.rules;
                 return newProduct;
                  }) 
-                }  
-                
-                console.log(evaluatedProducts) 
-             
+                }               
 
-        return null;
+        return evaluatedProducts;
     }
 
      
