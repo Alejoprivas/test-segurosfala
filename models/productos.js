@@ -22,7 +22,7 @@ class Product{
 
 
     testProduct = async ()=>{
-        console.log(await this.simulateProductbehavior(5))
+        console.log(await this.simulateProductbehavior(15))
         
     };
     getAllProducts = async ()=>{
@@ -57,34 +57,23 @@ class Product{
     simulateProductbehavior = async (days)=>{ 
         let productos = await this.getAllProducts();
         
-        let events = productos.map((product)=>{
-
-            //console.log(product);
-            //let value = product.rules.reduce(iterateOverRules,product);
-            
-
-            let myrule = product.rules.reduce((prev, curr)=>{ 
-                return (Math.abs(curr.daysremaining - product.sellIn) < Math.abs( prev.daysremaining - product.sellIn )? curr: prev);
-              
-              });
-              
-
-              console.log(product.sellIn);
-              console.log(myrule);
-              //let getCorrectRule = rulesRemainingDay.reduce()
-             
-             //value.sellIn--;
-            
-            //console.log(value);
-            
-            let suituableRule = product.rules.reduce((acc,currentElement,output)=>{
-                if(currentElement.daysremaining >= acc ){
-
-                };
-
-            },{});
-
+        for(let i=days;i>0;i--){
+            console.log("day:"+i);
+            let events = productos.map((product)=>{
+                
+                let applyCurrentRule = product.rules.reduce((prev, curr)=>{ 
+                    let daysLeft = Math.max(0,product.sellIn); 
+                    
+                    //return (Math.abs(curr.daysremaining - daysLeft) < Math.abs( prev.daysremaining - daysLeft) ? curr: prev);
+                    return (curr.daysremaining >= daysLeft && curr.daysremaining < prev.daysremaining  ? curr: prev);
+                });
+                
+            let newProduct = applyRule(applyCurrentRule,product);
+            newProduct.sellIn--;
+            return newProduct;
         })
+         console.log(events)
+        }
     }
     
 
@@ -101,18 +90,26 @@ let iterateOverRules = (product,currentElement,output)=>{
     accumulator = evaluatedProduct; 
     return accumulator
 } 
-let applyRules = (rule,product)=>{
-    if(product.sellIn >= rule.daysremaining){
-        if(rule.action === "add" && product.price < 100){
-            product.price = product.price + rule.setpricestep;
+let applyRule = (rule,product)=>{
+        if(rule.action === "add"){
+            let calculatePrice = product.price + rule.setpricestep;
+
+            product.price = calculatePrice <= 100 ? calculatePrice : 100 ;
         }
-        if(rule.action === "substract" && product.price > 0){
-            product.price = product.price - rule.setpricestep;
+        if(rule.action === "substract"){
+            let calculatePrice = product.price - rule.setpricestep;
+            product.price = calculatePrice >= 0 ? calculatePrice : 0 ; 
         } 
-    }
+        if(rule.action === "equalize"){
+            product.price = rule.setpricestep;
+        }
+    
 
     return product;
 }
+
+
+//binary search 
 
 module.exports = Product
 
